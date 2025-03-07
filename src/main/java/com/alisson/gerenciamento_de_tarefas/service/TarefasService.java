@@ -7,6 +7,8 @@ import jakarta.annotation.PostConstruct;
 
 import java.time.Instant;
 
+import static java.time.Instant.*;
+
 public class TarefasService {
     private final TarefaRepository tarefaRepository;
 
@@ -18,24 +20,25 @@ public class TarefasService {
     @PostConstruct
     private void generateRandomTask(){
         System.out.println("Iniciando a geração de uma tarefa aleatória...");
-        TarefaEntity tarefa = new TarefaEntity();
+        TarefaEntity tarefaEntity = new TarefaEntity();
 
-        tarefa.setTitle("Aulas de Programacao");
-        tarefa.setDescription("Hello World " + "Calculadora Simples " + "Contador de Palavras " + "Jogo da Adivinhação " + "Lista de Tarefas " + "Conversor de Unidades");
-        tarefa.setStatus(Status.Ready);
-        tarefa.setPriority(Priority.High);
-        tarefa.setUpdatedOn(Instant.now());
-        tarefa.setExpireOn(Instant.now());
-        tarefa.setCreatedOn(Instant.now());
+        tarefaEntity.setTitle("Aulas de Programacao");
+        tarefaEntity.setDescription("Hello World " + "Calculadora Simples " + "Contador de Palavras " + "Jogo da Adivinhação " + "Lista de Tarefas " + "Conversor de Unidades");
+        tarefaEntity.setStatus(Status.Ready);
+        tarefaEntity.setPriority(Priority.High);
+        tarefaEntity.setUpdatedOn(now());
+        tarefaEntity.setExpireOn(now());
+        tarefaEntity.setCreatedOn(now());
 
-        saveTarefa(tarefa);
+        saveTarefa(tarefaEntity);
 
 
     }
 
 
-    public void saveTarefa(final  TarefaEntity tarefa){
-        tarefaRepository.save(tarefa);
+    public void saveTarefa(final  TarefaEntity tarefaEntity){
+        tarefaRepository.save(tarefaEntity);
+
     }
 }
 
