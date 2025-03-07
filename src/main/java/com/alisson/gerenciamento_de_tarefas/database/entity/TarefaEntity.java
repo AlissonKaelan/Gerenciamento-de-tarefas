@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_task")
+@Table(name = "tb_task", schema = "schema_task")
 public class TarefaEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -57,7 +57,7 @@ public class TarefaEntity {
         return createdOn;
     }
 
-    public void setCreatedOn(Instant createdOn) {
+    public void setCreatedOn(Instant now) {
         this.createdOn = createdOn;
     }
 
