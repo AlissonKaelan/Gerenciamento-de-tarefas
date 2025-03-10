@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TarefaConvert {
-    public TarefaEntity convertTarefaEntity(final TarefaDto tarefaDto){
+    public TarefaEntity convertTarefaDtoToTarefaEntity(final TarefaDto tarefaDto){
             TarefaEntity tarefaEntity = new TarefaEntity();
             tarefaEntity.setTitle(tarefaDto.getTitle());
             tarefaEntity.setStatus(tarefaDto.getStatus());
@@ -18,7 +18,7 @@ public class TarefaConvert {
             return tarefaEntity;
     }
 
-    public TarefaDto convertTarefaDto(final TarefaEntity tarefaEntity){
+    public TarefaDto convertTarefaEntityTOTarefaDto(final TarefaEntity tarefaEntity){
             TarefaDto tarefaDto = new TarefaDto();
             tarefaDto.setId(tarefaDto.getId());
             tarefaDto.setTitle(tarefaDto.getTitle());

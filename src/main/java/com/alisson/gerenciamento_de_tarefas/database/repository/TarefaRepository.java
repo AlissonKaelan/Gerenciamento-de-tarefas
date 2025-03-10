@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 @Repository
 public interface TarefaRepository extends JpaRepository<TarefaEntity, UUID> {
-    //List<TarefaEntity> findAllByOrderByCreatedOnDesc();
+    List<TarefaEntity> findAllByOrderByCreatedOnDesc();
     //
     // List<TarefaEntity> findAllByStatusOrderByCreatedOnDesc(Status status);
 }
