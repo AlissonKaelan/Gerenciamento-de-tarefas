@@ -5,12 +5,11 @@ import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.database.entity.TarefaEntity;
 import com.alisson.gerenciamento_de_tarefas.database.repository.TarefaRepository;
 import com.alisson.gerenciamento_de_tarefas.exeptions.TarefaNotFoundExeptions;
-import com.alisson.gerenciamento_de_tarefas.mapper.TarefaConvert;
+import com.alisson.gerenciamento_de_tarefas.Convert.TarefaConvert;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -60,7 +59,7 @@ public class TarefasService {
     public TarefaDto getTarefaById(final UUID id){
         final Optional<TarefaEntity> optionalTarefaEntity = tarefaRepository.findById(id);
         if (optionalTarefaEntity.isPresent()){
-            return tarefaConvert.convertTarefaEntityTOTarefaDto(optionalTarefaEntity.get());
+            return tarefaConvert.convertTarefaEntityToTarefaDto(optionalTarefaEntity.get());
         }else {
                 throw new TarefaNotFoundExeptions("Tarefa com Id: "+ id + " não encontrado");
         }
@@ -98,7 +97,7 @@ public class TarefasService {
     public List<TarefaDto> getTarefaList(){
         return tarefaRepository.findAllByOrderByCreatedOnDesc()
                 .stream()
-                .map(tarefaConvert::convertTarefaEntityTOTarefaDto)
+                .map(tarefaConvert::convertTarefaEntityToTarefaDto)
                 .collect(Collectors.toList());
     }
 }

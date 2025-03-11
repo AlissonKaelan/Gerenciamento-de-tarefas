@@ -1,4 +1,4 @@
-package com.alisson.gerenciamento_de_tarefas.mapper;
+package com.alisson.gerenciamento_de_tarefas.Convert;
 
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.database.entity.TarefaEntity;
@@ -18,7 +18,7 @@ public class TarefaConvert {
             return tarefaEntity;
     }
 
-    public TarefaDto convertTarefaEntityTOTarefaDto(final TarefaEntity tarefaEntity){
+    public TarefaDto convertTarefaEntityToTarefaDto(final TarefaEntity tarefaEntity){
             TarefaDto tarefaDto = new TarefaDto();
             tarefaDto.setId(tarefaDto.getId());
             tarefaDto.setTitle(tarefaDto.getTitle());

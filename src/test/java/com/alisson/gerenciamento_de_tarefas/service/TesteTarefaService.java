@@ -5,11 +5,10 @@ import com.alisson.gerenciamento_de_tarefas.api.Status;
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.database.entity.TarefaEntity;
 import com.alisson.gerenciamento_de_tarefas.database.repository.TarefaRepository;
-import com.alisson.gerenciamento_de_tarefas.mapper.TarefaConvert;
+import com.alisson.gerenciamento_de_tarefas.Convert.TarefaConvert;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.Instant;
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-public class TarefaServiceTest {
+public class TesteTarefaService {
     @Mock
     private TarefaRepository tarefaRepository;
     @Mock
@@ -30,12 +29,12 @@ public class TarefaServiceTest {
     @InjectMocks
     private TarefasService tarefasService;
 
-    public TarefaServiceTest(){
+    public TesteTarefaService(){
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void saveTarefaTest() {
+    public void TarefaSaveTest() {
         final TarefaDto tarefaDto = new TarefaDto();
         final TarefaEntity tarefaEntity = new TarefaEntity();
 
@@ -56,7 +55,7 @@ public class TarefaServiceTest {
         when(tarefaRepository.findById(id)).thenReturn(Optional.of(tarefaEntity));
 
         TarefaDto tarefaDto = new TarefaDto();
-        when(tarefaConvert.convertTarefaEntityTOTarefaDto(tarefaEntity)).thenReturn(tarefaDto);
+        when(tarefaConvert.convertTarefaEntityToTarefaDto(tarefaEntity)).thenReturn(tarefaDto);
 
         TarefaDto tarefaDtoResult = tarefasService.getTarefaById(id);
 
@@ -64,7 +63,7 @@ public class TarefaServiceTest {
         assertEquals(tarefaDto, tarefaDtoResult);
 
         verify(tarefaRepository, times(1)).findById(id);
-        verify(tarefaConvert,times(1)).convertTarefaEntityTOTarefaDto(tarefaEntity);
+        verify(tarefaConvert,times(1)).convertTarefaEntityToTarefaDto(tarefaEntity);
     }
 
     @Test
@@ -107,14 +106,14 @@ public class TarefaServiceTest {
 
         TarefaDto tarefaDto = new TarefaDto();
         TarefaEntity tarefaEntity = new TarefaEntity();
-        when(tarefaConvert.convertTarefaEntityTOTarefaDto(tarefaEntity)).thenReturn(tarefaDto);
+        when(tarefaConvert.convertTarefaEntityToTarefaDto(tarefaEntity)).thenReturn(tarefaDto);
 
         List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
 
         assertNotNull(tarefaDtoList);
         assertEquals(3, tarefaDtoList.size());
         verify(tarefaRepository, times(1)).findAllByOrderByCreatedOnDesc();
-        verify(tarefaConvert, times(3)).convertTarefaEntityTOTarefaDto((TarefaEntity) any());
+        verify(tarefaConvert, times(3)).convertTarefaEntityToTarefaDto((TarefaEntity) any());
 
 
     }
