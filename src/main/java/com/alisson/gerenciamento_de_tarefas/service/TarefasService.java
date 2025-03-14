@@ -30,7 +30,7 @@ public class TarefasService {
         this.tarefaConvert = tarefaConvert;
     }
 
-    @PostConstruct
+    /**@PostConstruct
     private void generateRandomTask(){
 
         TarefaDto tarefaDto = new TarefaDto();
@@ -45,7 +45,7 @@ public class TarefasService {
         saveTarefa(tarefaDto);
 
 
-    }
+    }**/
 
 
     public void saveTarefa(final TarefaDto tarefaDto){
@@ -81,11 +81,11 @@ public class TarefasService {
                 TarefaEntity tarefaEntity = optionalTarefaEntity.get();
                 tarefaEntity.setDescription(tarefaDto.getDescription());
                 tarefaEntity.setTitle(tarefaDto.getTitle());
-                tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
-                tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
+                //tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
+                //tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
                 tarefaEntity.setStatus(tarefaDto.getStatus());
                 tarefaEntity.setPriority(tarefaDto.getPriority());
-                tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
+                //tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
 
                 tarefaRepository.save(tarefaEntity);
             } else {

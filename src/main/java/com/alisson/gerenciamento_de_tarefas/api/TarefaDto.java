@@ -9,10 +9,10 @@ public class TarefaDto {
     private UUID id;
     @NotEmpty(message = "o título não deve ser nulo")
     private String title;
-    private Instant createdOn;
-    private Instant updatedOn;
+    private String createdOn;
+    private String updatedOn;
     @NotEmpty(message = "A data da experiência não pode estar vazia")
-    private Instant expireOn;
+    private String expireOn;
     private Priority priority;
     private Status status;
     @NotEmpty(message = "descrição é obrigatória")
@@ -38,27 +38,27 @@ public class TarefaDto {
         this.title = title;
     }
 
-    public Instant getCreatedOn() {
+    public String getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Instant createdOn) {
+    public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Instant getUpdatedOn() {
+    public String getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Instant updatedOn) {
+    public void setUpdatedOn(String updatedOn) {
         this.updatedOn = updatedOn;
     }
 
-    public Instant getExpireOn() {
+    public String getExpireOn() {
         return expireOn;
     }
 
-    public void setExpireOn(Instant expireOn) {
+    public void setExpireOn(String expireOn) {
         this.expireOn = expireOn;
     }
 
