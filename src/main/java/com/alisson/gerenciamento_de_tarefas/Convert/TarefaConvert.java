@@ -15,6 +15,7 @@ public class TarefaConvert {
             tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
             tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
             tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
+            tarefaEntity.setPriority(tarefaDto.getPriority());
             return tarefaEntity;
     }
 

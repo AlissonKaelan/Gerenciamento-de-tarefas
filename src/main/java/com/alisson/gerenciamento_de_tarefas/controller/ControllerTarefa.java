@@ -19,6 +19,7 @@ public class ControllerTarefa {
         this.tarefasService = tarefasService;
     }
 
+
     public ModelAndView home(){
         ModelAndView mv = new ModelAndView("index");
         List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
@@ -30,6 +31,8 @@ public class ControllerTarefa {
     public ModelAndView pageNewTask(){
         ModelAndView mv = new ModelAndView("new-task");
         mv.addObject("tarefaDto", new TarefaDto());
+        mv.addObject("priorities", tarefasService.getPriorities());
+        mv.addObject("statusList", tarefasService.getStatus());
         return mv;
     }
 
