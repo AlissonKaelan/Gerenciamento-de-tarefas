@@ -10,6 +10,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,14 +30,14 @@ public class TarefasService {
         this.tarefaConvert = tarefaConvert;
     }
 
-    @PostConstruct
+    /**@PostConstruct
     private void generateRandomTask(){
 
         TarefaDto tarefaDto = new TarefaDto();
-        tarefaDto.setTitle("Aulas de Piano");
-        tarefaDto.setDescription("Aula dia 24 " + "Professor Jubuleu" + "14hrs" + "Praca 4");
+        tarefaDto.setTitle("Tete 1");
+        tarefaDto.setDescription("Day 23 " + "Sala 9" + "14hrs" + "Caneta azul ou preta");
         tarefaDto.setStatus(Status.Progress);
-        tarefaDto.setPriority(Priority.Low);
+        tarefaDto.setPriority(Priority.High);
         tarefaDto.setUpdatedOn(now());
         tarefaDto.setExpireOn(now());
         tarefaDto.setCreatedOn(now());
@@ -43,7 +45,7 @@ public class TarefasService {
         saveTarefa(tarefaDto);
 
 
-    }
+    }**/
 
 
     public void saveTarefa(final TarefaDto tarefaDto){
@@ -79,11 +81,11 @@ public class TarefasService {
                 TarefaEntity tarefaEntity = optionalTarefaEntity.get();
                 tarefaEntity.setDescription(tarefaDto.getDescription());
                 tarefaEntity.setTitle(tarefaDto.getTitle());
-                tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
-                tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
+                //tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
+                //tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
                 tarefaEntity.setStatus(tarefaDto.getStatus());
                 tarefaEntity.setPriority(tarefaDto.getPriority());
-                tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
+                //tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
 
                 tarefaRepository.save(tarefaEntity);
             } else {
@@ -99,6 +101,14 @@ public class TarefasService {
                 .stream()
                 .map(tarefaConvert::convertTarefaEntityToTarefaDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> getPriorities(){
+        return Arrays.asList(Priority.Low.toString(), Priority.High.toString(), Priority.Normal.toString());
+    }
+
+    public List<String> getStatus() {
+        return Arrays.asList(Status.Done.toString(), Status.Ready.toString(), Status.Progress.toString());
     }
 }
 

@@ -81,7 +81,7 @@ public class TesteTarefaService {
         Instant date = Instant.now();
         tarefaDto.setStatus(Status.Progress);
         tarefaDto.setDescription("Update description");
-        tarefaDto.setPriority(Priority.High);
+        tarefaDto.setPriority(Priority.Low);
 
         TarefaEntity tarefaEntity = new TarefaEntity();
         tarefaEntity.setId(tarefaDto.getId());
@@ -95,7 +95,7 @@ public class TesteTarefaService {
         assertEquals("Titulo update", tarefaEntity.getTitle());
         assertEquals("Update description", tarefaEntity.getDescription());
         assertEquals(Status.Progress, tarefaEntity.getStatus());
-        assertEquals(Priority.High, tarefaEntity.getPriority());
+        assertEquals(Priority.Low, tarefaEntity.getPriority());
 
     }
 

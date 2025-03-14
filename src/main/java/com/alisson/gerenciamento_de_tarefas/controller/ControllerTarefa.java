@@ -3,9 +3,11 @@ package com.alisson.gerenciamento_de_tarefas.controller;
 
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.service.TarefasService;
+import jakarta.persistence.PreUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class ControllerTarefa {
         this.tarefasService = tarefasService;
     }
 
+
     public ModelAndView home(){
         ModelAndView mv = new ModelAndView("index");
         List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
@@ -30,7 +33,15 @@ public class ControllerTarefa {
     public ModelAndView pageNewTask(){
         ModelAndView mv = new ModelAndView("new-task");
         mv.addObject("tarefaDto", new TarefaDto());
+        mv.addObject("priorities", tarefasService.getPriorities());
+        mv.addObject("statusList", tarefasService.getStatus());
         return mv;
+    }
+
+    @PostMapping("/add-or-update-task")
+    public ModelAndView addOrUpgradeTask(final TarefaDto tarefaDto){
+        String title = tarefaDto.getTitle();
+        return null;
     }
 
 }
