@@ -17,9 +17,7 @@ public class TarefaConvert {
             tarefaEntity.setTitle(tarefaDto.getTitle());
             tarefaEntity.setStatus(tarefaDto.getStatus());
             tarefaEntity.setDescription(tarefaDto.getDescription());
-            tarefaEntity.setUpdatedOn(convertStringToInstant(tarefaDto.getUpdatedOn()));
             tarefaEntity.setExpireOn(convertStringToInstant(tarefaDto.getExpireOn()));
-            tarefaEntity.setCreatedOn(convertStringToInstant(tarefaDto.getCreatedOn()));
             tarefaEntity.setPriority(tarefaDto.getPriority());
             return tarefaEntity;
     }
