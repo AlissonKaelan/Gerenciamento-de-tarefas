@@ -11,7 +11,7 @@
     <div th:if="${not #lists.isEmpty(tarefaDtoList)}">
         <div id="task-container" class="card container"
              style="margin-top:1%; margin-bottom:1%; width: 60%; height:60%; border: none; padding-bottom:2%">
-            <div th:each="taskDto, iterStat : ${tarefaDtoList}">
+            <div th:each="tarefaDto, iterStat : ${tarefaDtoList}">
                 <div class="card-body" style="margin-bottom: 8px; margin-bottom: 4px;">
                     <div id="accordion">
                         <div th:id="'card-' + ${tarefaDto.id}" class="card" style="margin-bottom: -4%;">

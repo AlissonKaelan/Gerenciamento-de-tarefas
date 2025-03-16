@@ -23,8 +23,7 @@ public class ControllerTarefa {
     public ControllerTarefa(final TarefasService tarefasService) {
         this.tarefasService = tarefasService;
     }
-
-
+    @GetMapping("/")
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView("index");
         List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
