@@ -3,12 +3,14 @@ package com.alisson.gerenciamento_de_tarefas.controller;
 
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.service.TarefasService;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,10 +26,11 @@ public class ControllerTarefa {
         this.tarefasService = tarefasService;
     }
     @GetMapping("/")
-    public ModelAndView home() {
+    public ModelAndView home(@ModelAttribute("alertMessage") @Nullable String alertMessage){
         ModelAndView mv = new ModelAndView("index");
         List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
         mv.addObject("tarefaDtoList", tarefaDtoList);
+        mv.addObject("alertMessage", alertMessage);
         return mv;
     }
 
@@ -37,6 +40,8 @@ public class ControllerTarefa {
         mv.addObject("tarefaDto", new TarefaDto());
         mv.addObject("priorities", tarefasService.getPriorities());
         mv.addObject("statusList", tarefasService.getStatus());
+        mv.addObject("alertMessage", "");
+
         return mv;
     }
 
