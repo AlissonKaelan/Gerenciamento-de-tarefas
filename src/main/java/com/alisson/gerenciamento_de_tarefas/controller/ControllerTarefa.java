@@ -8,14 +8,17 @@ import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller("/")
 public class ControllerTarefa {
@@ -68,6 +71,23 @@ public class ControllerTarefa {
         return new ModelAndView("redirect:/");
 
 
+    }
+
+    @GetMapping("/edit-task/{id}")
+    public ModelAndView editTask(@PathVariable ("id")UUID id, RedirectAttributes redirectAttributes){
+        TarefaDto tarefaDto = tarefasService.getTarefaById(id);
+        redirectAttributes.addFlashAttribute("tarefaDto", tarefaDto);
+        return new ModelAndView("redirect:/edit-task");
+    }
+
+    @GetMapping("/edit-task")
+    public ModelAndView editTaskRedirect (Model model, @ModelAttribute ("tarefaDto") TarefaDto tarefaDto){
+        ModelAndView mv = new ModelAndView("new-task");
+        mv.addObject("tarefaDto", tarefaDto);
+        mv.addObject("priorities", tarefasService.getPriorities());
+        mv.addObject("statusList", tarefasService.getStatus());
+        mv.addObject("alertMessage", "");
+        return mv;
     }
 
 }

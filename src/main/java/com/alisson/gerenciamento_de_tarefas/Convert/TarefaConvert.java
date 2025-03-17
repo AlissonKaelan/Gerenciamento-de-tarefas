@@ -41,7 +41,7 @@ public class TarefaConvert {
             return dateFormat.format(Date.from(dateInstant));
     }
 
-    private Instant convertStringToInstant(final String dateString){
+    public Instant convertStringToInstant(final String dateString){
             try {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = dateFormat.parse(dateString);
