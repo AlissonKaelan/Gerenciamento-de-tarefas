@@ -81,11 +81,9 @@ public class TarefasService {
                 TarefaEntity tarefaEntity = optionalTarefaEntity.get();
                 tarefaEntity.setDescription(tarefaDto.getDescription());
                 tarefaEntity.setTitle(tarefaDto.getTitle());
-                //tarefaEntity.setUpdatedOn(tarefaDto.getUpdatedOn());
-                //tarefaEntity.setExpireOn(tarefaDto.getExpireOn());
+                tarefaEntity.setExpireOn(tarefaConvert.convertStringToInstant(tarefaDto.getExpireOn()));
                 tarefaEntity.setStatus(tarefaDto.getStatus());
                 tarefaEntity.setPriority(tarefaDto.getPriority());
-                //tarefaEntity.setCreatedOn(tarefaDto.getCreatedOn());
 
                 tarefaRepository.save(tarefaEntity);
             } else {
