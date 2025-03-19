@@ -1,5 +1,7 @@
 package com.alisson.gerenciamento_de_tarefas.Convert;
 
+import com.alisson.gerenciamento_de_tarefas.api.Priority;
+import com.alisson.gerenciamento_de_tarefas.api.Status;
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.database.entity.TarefaEntity;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,8 @@ public class TarefaConvert {
             tarefaDto.setUpdatedOn(convertInstantToString(tarefaEntity.getUpdatedOn()));
             tarefaDto.setExpireOn(convertInstantToString(tarefaEntity.getExpireOn()));
             tarefaDto.setCreatedOn(convertInstantToString(tarefaEntity.getCreatedOn()));
+            tarefaDto.setStatusClass(getStatusClass(tarefaEntity.getStatus()));
+            tarefaDto.setPriorityClass(getPriorityClass(tarefaEntity.getPriority()));
             return tarefaDto;
 
     }
@@ -49,5 +53,27 @@ public class TarefaConvert {
             }catch (ParseException pe){
                 throw new IllegalArgumentException("Error during data parse" + pe.getMessage());
             }
+    }
+
+    private String getStatusClass(Status status){
+        return switch (status){
+            case Ready -> "badge badge-primary";
+            case Progress -> "badge badge-warning";
+            case Done -> "badge badge-success";
+            default -> "badge badge-secondary";
+
+
+        };
+    }
+
+    private String getPriorityClass(Priority priority){
+        return switch (priority){
+            case Low -> "badge badge-primary";
+            case Normal -> "badge badge-warning";
+            case High -> "badge badge-danger";
+            default -> "badge badge-secondary";
+
+
+        };
     }
 }
