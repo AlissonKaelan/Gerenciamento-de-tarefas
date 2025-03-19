@@ -17,6 +17,24 @@ public class TarefaDto {
     private Status status;
     @NotEmpty(message = "descrição é obrigatória")
     private String description;
+    private String statusClass;
+    private String priorityClass;
+
+    public String getStatusClass() {
+        return statusClass;
+    }
+
+    public void setStatusClass(String statusClass) {
+        this.statusClass = statusClass;
+    }
+
+    public String getPriorityClass() {
+        return priorityClass;
+    }
+
+    public void setPriorityClass(String priorityClass) {
+        this.priorityClass = priorityClass;
+    }
 
     public TarefaDto(){
 
