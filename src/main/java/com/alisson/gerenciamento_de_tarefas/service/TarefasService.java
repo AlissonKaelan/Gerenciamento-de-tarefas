@@ -108,5 +108,13 @@ public class TarefasService {
     public List<String> getStatus() {
         return Arrays.asList(Status.Done.toString(), Status.Ready.toString(), Status.Progress.toString());
     }
+
+    public List<TarefaDto> getTarefaListByStatus(Status status){
+        if (status == null){
+            return getTarefaList();
+        }
+        List<TarefaEntity> tarefaEntityList = tarefaRepository.findAllByStatusOrderByCreatedOnDesc(status);
+        return tarefaEntityList.stream().map(tarefaConvert::convertTarefaEntityToTarefaDto).collect(Collectors.toList());
+    }
 }
 
