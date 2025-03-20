@@ -1,6 +1,7 @@
 package com.alisson.gerenciamento_de_tarefas.controller;
 
 
+import com.alisson.gerenciamento_de_tarefas.api.Status;
 import com.alisson.gerenciamento_de_tarefas.api.TarefaDto;
 import com.alisson.gerenciamento_de_tarefas.service.TarefasService;
 import jakarta.annotation.Nullable;
@@ -20,15 +21,18 @@ import java.util.UUID;
 @Controller("/")
 public class ControllerTarefa {
     private final TarefasService tarefasService;
+    private Status globalStatus;
 
     @Autowired
     public ControllerTarefa(final TarefasService tarefasService) {
         this.tarefasService = tarefasService;
     }
+
+
     @GetMapping("/")
     public ModelAndView home(@ModelAttribute("alertMessage") @Nullable String alertMessage){
         ModelAndView mv = new ModelAndView("index");
-        List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
+        List<TarefaDto> tarefaDtoList = tarefasService.getTarefaListByStatus(globalStatus);
         mv.addObject("tarefaDtoList", tarefaDtoList);
         mv.addObject("alertMessage", alertMessage);
         return mv;
@@ -96,4 +100,10 @@ public class ControllerTarefa {
         return mv;
     }
 
+    @GetMapping("/task-by-status")
+    public ModelAndView getTaskListByStatus(@RequestParam(name = "status", required = false) Status status){
+        ModelAndView mv = new ModelAndView("redirect:/");
+        globalStatus = status;
+        return mv;
+    }
 }
