@@ -8,6 +8,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +22,10 @@ import java.util.UUID;
 @Controller("/")
 public class ControllerTarefa {
     private final TarefasService tarefasService;
-    private Status globalStatus;
+    private String globalStatus;
+    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_NO = 1;
+    private Integer SELECTED_PAGE;
 
     @Autowired
     public ControllerTarefa(final TarefasService tarefasService) {
@@ -32,9 +36,18 @@ public class ControllerTarefa {
     @GetMapping("/")
     public ModelAndView home(@ModelAttribute("alertMessage") @Nullable String alertMessage){
         ModelAndView mv = new ModelAndView("index");
-        List<TarefaDto> tarefaDtoList = tarefasService.getTarefaListByStatus(globalStatus);
+        if (SELECTED_PAGE == null){
+            SELECTED_PAGE = PAGE_NO;
+        }
+
+        Page<TarefaDto> page = tarefasService.getTarefaPaginated(SELECTED_PAGE, PAGE_SIZE, globalStatus);
+        List<TarefaDto> tarefaDtoList = page.getContent();
         mv.addObject("tarefaDtoList", tarefaDtoList);
+        mv.addObject("currentPage", SELECTED_PAGE);
+        mv.addObject("totalPages", page.getTotalPages());
+        mv.addObject("totalItems", page.getTotalElements());
         mv.addObject("alertMessage", alertMessage);
+        SELECTED_PAGE = null;
         return mv;
     }
 
@@ -94,16 +107,34 @@ public class ControllerTarefa {
     @DeleteMapping("/delete-task/{id}")
     public ModelAndView deleteTask(@PathVariable UUID id){
         tarefasService.deletTarefa(id);
-        List<TarefaDto> tarefaDtoList = tarefasService.getTarefaList();
         ModelAndView mv = new ModelAndView("components/task-card");
+        Page<TarefaDto> page = tarefasService.getTarefaPaginated(SELECTED_PAGE != null ? SELECTED_PAGE : 1, PAGE_SIZE, globalStatus);
+        List<TarefaDto> tarefaDtoList = page.getContent();
+        mv.addObject("tarefaDtoList", tarefaDtoList);
+        mv.addObject("currentPage", SELECTED_PAGE != null ? SELECTED_PAGE : 1);
+        mv.addObject("totalPages", page.getTotalPages());
+        mv.addObject("totalItems", page.getTotalElements());
         mv.addObject("tarefaDtoList", tarefaDtoList);
         return mv;
     }
 
     @GetMapping("/task-by-status")
-    public ModelAndView getTaskListByStatus(@RequestParam(name = "status", required = false) Status status){
+    public ModelAndView getTaskListByStatus(@RequestParam(name = "status", required = false) String status){
         ModelAndView mv = new ModelAndView("redirect:/");
         globalStatus = status;
+        return mv;
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public ModelAndView findPaginated(@PathVariable (value = "pageNo")int pageNo){
+        ModelAndView mv = new ModelAndView("components/task-card");
+        SELECTED_PAGE = pageNo;
+        Page<TarefaDto> page = tarefasService.getTarefaPaginated(pageNo, PAGE_SIZE, globalStatus);
+        List<TarefaDto> tarefaDtoList = page.getContent();
+        mv.addObject("tarefaDtoList", tarefaDtoList);
+        mv.addObject("currentPage", pageNo);
+        mv.addObject("totalPages", page.getTotalPages());
+        mv.addObject("totalItems", page.getTotalElements());
         return mv;
     }
 }
