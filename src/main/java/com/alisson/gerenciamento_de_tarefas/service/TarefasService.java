@@ -7,6 +7,10 @@ import com.alisson.gerenciamento_de_tarefas.database.repository.TarefaRepository
 import com.alisson.gerenciamento_de_tarefas.exeptions.TarefaNotFoundExeptions;
 import com.alisson.gerenciamento_de_tarefas.Convert.TarefaConvert;
 import jakarta.annotation.PostConstruct;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -109,12 +113,38 @@ public class TarefasService {
         return Arrays.asList(Status.Done.toString(), Status.Ready.toString(), Status.Progress.toString());
     }
 
-    public List<TarefaDto> getTarefaListByStatus(Status status){
+    public List<TarefaDto> getTarefaListByStatus(String  stringStatus){
+        Status status = tarefaConvert.convertStatus(stringStatus);
         if (status == null){
             return getTarefaList();
         }
         List<TarefaEntity> tarefaEntityList = tarefaRepository.findAllByStatusOrderByCreatedOnDesc(status);
         return tarefaEntityList.stream().map(tarefaConvert::convertTarefaEntityToTarefaDto).collect(Collectors.toList());
+    }
+
+    public Page<TarefaDto> getTarefaPaginated(int pageNo, int pageSize, String status){
+        List<TarefaDto> tarefaDtoList;
+        Page<TarefaDto> page;
+        if (status == null || status.isEmpty() || status.equals("all")){
+            tarefaDtoList = getTarefaList();
+        }else {
+            tarefaDtoList = getTarefaListByStatus(status);
+            pageNo = 1;
+        }
+        if(!tarefaDtoList.isEmpty()){
+            if (tarefaDtoList.size() < pageSize){
+                pageSize = tarefaDtoList.size();
+            }
+            Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+            int start = (int)pageable.getOffset();
+            int end = Math.min((start + pageable.getPageSize()), tarefaDtoList.size());
+            List<TarefaDto> subList = tarefaDtoList.subList(start, end);
+            page = new PageImpl<>(subList, pageable, tarefaDtoList.size());
+        }else {
+            page = Page.empty();
+        }
+        return page;
+
     }
 }
 
