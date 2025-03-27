@@ -15,16 +15,37 @@
 O projeto **Gerenciamento de Tarefas** é uma aplicação web desenvolvida em Java utilizando o framework Spring Boot. O objetivo é permitir que os usuários possam criar, editar, visualizar e excluir tarefas, além de gerenciar suas prioridades e status.
 
 ## Tecnologias Utilizadas
-- ![Java](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg) **Java 19**
-- ![Spring](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg) **Spring Boot 3.4.3**
-- ![Thymeleaf](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/thymeleaf/thymeleaf-original.svg) **Thymeleaf** para renderização de templates
-- ![JPA](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg) **Spring Data JPA** para acesso a dados
-- ![PostgreSQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg) **PostgreSQL** como banco de dados
-- ![Maven](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg) **Maven** como gerenciador de dependências
-- ![Bootstrap](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg) **Bootstrap** para estilização da interface
+
+- <img align="left" alt="Java 19" title="Java 19" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-plain-wordmark.svg"/> **Java 19**
+<br><br><br><br><br><br>
+
+- <img align="left" alt="Spring Boot 3.4.3" title="Spring Boot 3.4.3" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"/> **Spring Boot 3.4.3**
+<br><br><br><br><br><br>
+
+- <img align="left" alt="Spring Data JPA" title="Spring Data JPA" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"/> **Spring Data JPA** para acesso a dados
+<br><br><br><br><br><br>
+
+- <img align="left" alt="PostgreSQL" title="PostgreSQL" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"/> **PostgreSQL** como banco de dados
+<br><br><br><br><br><br>
+
+- <img align="left" alt="Maven" title="Maven" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg"/> **Maven** como gerenciador de dependências
+<br><br><br><br><br><br>
+
+- <img align="left" alt="Bootstrap" title="Bootstrap" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg"/> **Bootstrap** para estilização da interface
+<br><br><br><br><br><br>
+
+- <img align="left" alt="Docker" title="Docker" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"/> **Docker** para containerização da aplicação
+<br><br><br><br><br><br>
+
+- <img align="left" alt="HTML5" title="HTML5" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"/> **HTML5** para estruturação do conteúdo
+<br><br><br><br><br><br>
+
+- <img align="left" alt="HTMX" title="HTMX" width="100px" style="padding-right: 10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/htmx/htmx-original.svg"/> **HTMX** para interações dinâmicas na interface
+<br><br><br><br><br><br>
 
 ## Estrutura do Projeto
 A estrutura do projeto é organizada da seguinte forma:
+
 
 ```
 MultipleFiles/
